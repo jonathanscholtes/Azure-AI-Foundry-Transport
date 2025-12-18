@@ -10,7 +10,6 @@ A comprehensive transport and logistics optimization platform built on Azure AI 
 
 This application enables intelligent transport management through:
 - **AI-powered optimization** leveraging Azure AI Foundry and agents
-- **Real-time data processing** with Container Apps
 - **Agentic knowledge with RAG** through Azure AI Search integration providing retrieval-augmented generation capabilities
 - **Scalable MCP server** with Azure Container Apps
 - **Enterprise-grade infrastructure** deployed on Azure
@@ -44,6 +43,10 @@ This application enables intelligent transport management through:
 ---
 
 ## 📐 Architecture
+
+![design](/media/design.png)
+---
+
 
 The solution is organized into modular components deployed via Infrastructure as Code (Bicep):
 
