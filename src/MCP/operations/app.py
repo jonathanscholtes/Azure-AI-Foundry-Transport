@@ -32,10 +32,17 @@ store = TruckingOperationsStore()
 @app.tool()
 async def get_load_context(load_id: str) -> List[Dict]:
     """
-    Retrieve all operational records associated with a load.
+    Retrieve the full operational context for a SINGLE, SPECIFIC load.
 
-    Use this tool when you need the full operational context for a load,
-    including assignment and event history.
+    IMPORTANT USAGE RULES:
+    - Use this tool ONLY when the user provides a concrete load identifier
+      (for example: "Load 12345").
+    - The load_id parameter MUST be an exact, known load or shipment ID.
+    - Do NOT use this tool to search, filter, list, or discover loads.
+    - Do NOT pass descriptive terms such as "high_priority", "late",
+      "delayed", or "with exceptions" as load_id values.
+
+    This tool is for LOOKUP by ID, not for attribute-based queries.
 
     Returns:
     - Load record
@@ -43,9 +50,9 @@ async def get_load_context(load_id: str) -> List[Dict]:
     - Exception record(s)
 
     Does NOT return:
-    - Documents
-    - Contracts or SLAs
-    - Free-text explanations or reasoning
+    - Search results or filtered lists
+    - Documents, contracts, or SLAs
+    - Aggregations, summaries, or reasoning
     """
     
     logger.info(f"[get_load_context] Requested load_id={load_id}")
@@ -74,19 +81,17 @@ async def get_load_context(load_id: str) -> List[Dict]:
 @app.tool()
 async def get_load_exceptions(load_id: str) -> List[Dict]:
     """
-    Retrieve exception records for a specific load.
+    Retrieve exception records for a SINGLE, SPECIFIC load.
 
-    Use this tool when you need to understand what operational issues
-    occurred for a load (e.g., delays, breakdowns, violations).
+    IMPORTANT USAGE RULES:
+    - Use this tool ONLY when a valid load ID is known.
+    - Do NOT use this tool to discover which loads have exceptions.
+    - Do NOT pass descriptive or categorical values as load_id.
 
     Returns:
     - Exception record(s) only
-
-    Does NOT return:
-    - Load or dispatch records
-    - Documents or narratives
-    - Root-cause analysis or reasoning
     """
+
     logger.info(f"[get_load_exceptions] Requested load_id={load_id}")
 
     try:
@@ -117,20 +122,26 @@ async def get_exceptions_by_type(
     """
     Retrieve operational exception records filtered by exception type.
 
-    Use this tool when you need to identify exceptions of a specific category
-    (e.g., Late Delivery, Breakdown, Weather Delay, HOS Violation).
+    VALID EXCEPTION TYPES (case-insensitive):
+    - Late Delivery
+    - Breakdown
+    - Weather Delay
+    - HOS Violation
 
-    Parameters:
-    - exception_type: The exception category to filter by.
-
+    IMPORTANT USAGE RULES:
+    - Use this tool ONLY with one of the valid exception types listed above.
+    - Do NOT invent new exception categories.
+    - Do NOT pass free-form descriptions or combined values.
+    - This tool identifies exceptions, NOT loads.
+    - Load attributes such as priority must be retrieved separately.
 
     Returns:
-    - Matching exception record(s)
+    - Matching exception record(s) referencing load IDs
 
     Does NOT return:
     - Load or dispatch records
-    - Root-cause analysis
     - Aggregations or summaries
+    - Root-cause analysis
     """
     
     logger.info(

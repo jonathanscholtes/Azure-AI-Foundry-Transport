@@ -1,0 +1,93 @@
+> ⚠️  
+> **This project is currently in active development and may contain breaking changes.**  
+> Updates and modifications are being made frequently, which may impact stability or functionality. This notice will be removed once development is complete and the project reaches a stable release.  
+
+# Azure AI Foundry Transport
+
+A comprehensive transport and logistics optimization platform built on Azure AI Foundry, designed to provide intelligent decision-making through advanced AI agents.
+
+## Overview
+
+This application enables intelligent transport management through:
+- **AI-powered optimization** leveraging Azure AI Foundry and agents
+- **Real-time data processing** with Container Apps
+- **Agentic knowledge with RAG** through Azure AI Search integration providing retrieval-augmented generation capabilities
+- **Scalable MCP server** with Azure Container Apps
+- **Enterprise-grade infrastructure** deployed on Azure
+
+
+### Features
+
+#### AI Agent Orchestration
+- Azure AI Foundry Agent Service for intelligent decision-making
+- Dynamic tool calling with MCP (Model Context Protocol) remote servers
+- Multi-turn conversation management
+- Transportation Operations MCP server for domain-specific tooling
+
+#### Data Management
+- Real-time data ingestion and processing
+- Cosmos DB for distributed data storage
+- Azure Storage for scalable blob and table storage
+- Azure AI Search for retrieval-augmented generation (RAG) providing agentic knowledge context
+
+#### API Services
+- FastMCP server providing dynamic tool definitions
+- Container-based deployment on Azure Container Apps
+- MCP protocol for agent tool integration
+
+#### Monitoring & Observability
+- Application Insights integration
+- Log Analytics for centralized logging
+- Performance monitoring and diagnostics
+- Comprehensive audit trails
+
+---
+
+## 📐 Architecture
+
+The solution is organized into modular components deployed via Infrastructure as Code (Bicep):
+
+### Components
+
+- **MCP Server**: FastMCP-based Transportation Operations server running on Container Apps
+- **AI Services**: Azure AI Foundry Agent Service with Azure OpenAI and Azure AI Search (RAG) for agentic knowledge
+- **Data Storage**: Azure Cosmos DB and Azure Storage for persistent data
+- **Container Infrastructure**: Azure Container Apps for scalable deployment
+- **Monitoring**: Application Insights and Log Analytics for observability
+- **Security**: Azure Key Vault for secrets management and managed identities
+
+---
+
+## 🛠️ **Core Steps for Solution Implementation**
+
+Follow these key steps to successfully deploy and configure the solution:
+
+### 1️⃣ [**Deploy the Solution**](docs/deployment.md)
+- Detailed instructions for deploying the solution, including prerequisites, configuration steps, and setup validation.
+
+---
+
+## Repo Layout (where to look)
+
+- `infra/` — Bicep modules to provision core cloud resources (AI Foundry, search, storage, container apps, monitoring)
+- `src/MCP/` — MCP server implementation for transportation operations with dynamic tool definitions
+- `src/data_generator/` — Data generation and indexing utilities for Azure Cosmos DB and AI Search
+- `src/Notebooks/` — Jupyter notebooks for data exploration and AI agent interaction examples
+- `scripts/` — Helper scripts for packaging and deployment automation
+- `docs/` — Documentation and deployment guides
+
+---
+
+## ♻️ **Clean-Up**
+
+After completing testing or when no longer needed, ensure you delete any unused Azure resources or remove the entire Resource Group to avoid additional charges.
+
+---
+
+## 📜 License  
+This project is licensed under the [MIT License](LICENSE.md), granting permission for commercial and non-commercial use with proper attribution.
+
+---
+
+## Disclaimer  
+This project and demo application are intended for educational and demonstration purposes. It is provided "as-is" without any warranties, and users assume all responsibility for its use.
